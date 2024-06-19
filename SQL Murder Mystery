@@ -30,13 +30,14 @@ where person.name = 'Jeremy Bowers'
 
 #Discover the real culprit of the murder from the killers interview
 
-select p.name, p.id, dl.hair_color,dl.car_make,dl.car_model, i.annual_income
+select p.name, p.id, dl.hair_color,dl.car_make,dl.car_model, i.annual_income, fb. event_name, fb.date
 from person as p
 join drivers_license as dl
 on p.license_id = dl.id
 join income as i
 on p.ssn = i.ssn
+join facebook_event_checkin as fb
+on p.id = fb.person_id
 where hair_color = 'red'
 and car_make = 'Tesla'
 and gender = 'female'
-order by annual_income desc
