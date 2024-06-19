@@ -1,4 +1,13 @@
+#Go through the crime report and find out the murders that happened in SQL City on the 15th of Jan, 2018
+
+select *
+from crime_scene_report
+where city = 'SQL City'
+and type = 'murder'
+and date = 20180115
+
 # Using the witness statements, discover the killer
+
 select gym.membership_id, member.name, member.membership_status, dl.gender, dl.plate_number
 from get_fit_now_check_in as gym
 join get_fit_now_member as member
@@ -12,6 +21,7 @@ and membership_status = 'gold'
 and plate_number like '%H42%'
 
 #Find the transcript of the murderer to get an idea of who was the real brains of the operation
+
 select person.name, interview.transcript
 from person
 join interview
@@ -19,6 +29,7 @@ on person.id = interview.person_id
 where person.name = 'Jeremy Bowers'
 
 #Discover the real culprit of the murder from the killers interview
+
 select p.name, p.id, dl.hair_color,dl.car_make,dl.car_model, i.annual_income
 from person as p
 join drivers_license as dl
