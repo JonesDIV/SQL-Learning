@@ -1,0 +1,31 @@
+# Using the witness statements, discover the killer
+select gym.membership_id, member.name, member.membership_status, dl.gender, dl.plate_number
+from get_fit_now_check_in as gym
+join get_fit_now_member as member
+on gym.membership_id = member.id
+join person
+on member.name = person.name
+join drivers_license as dl
+on person.license_id = dl.id
+where check_in_date = 20180109
+and membership_status = 'gold'
+and plate_number like '%H42%'
+
+#Find the transcript of the murderer to get an idea of who was the real brains of the operation
+select person.name, interview.transcript
+from person
+join interview
+on person.id = interview.person_id
+where person.name = 'Jeremy Bowers'
+
+#Discover the real culprit of the murder from the killers interview
+select p.name, p.id, dl.hair_color,dl.car_make,dl.car_model, i.annual_income
+from person as p
+join drivers_license as dl
+on p.license_id = dl.id
+join income as i
+on p.ssn = i.ssn
+where hair_color = 'red'
+and car_make = 'Tesla'
+and gender = 'female'
+order by annual_income desc
